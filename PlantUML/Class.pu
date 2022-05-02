@@ -1,0 +1,83 @@
+@startuml
+package Data
+{
+    package Enums
+    {
+        enum TileState
+        enum PlayerMoveType
+    }
+
+    package ValueObjects
+    {
+        class Tile
+        {
+            + int Point
+            + TileState TileState
+        }
+    }
+
+    package ScriptableObjects
+    {
+        package ScriptableObjects.Field
+        {
+            class FieldMasterData
+            {
+                + int FieldSize
+                + int MinTilePoint
+                + int MaxTilePoint
+            }
+        }
+    }
+}
+
+package Repositories
+{
+    package Repositories.Field
+    {
+        class FieldRepository
+        {
+            - FieldMasterData fieldMasterData
+            + int FieldSize;
+        }
+    }
+}
+
+package InGame
+{
+    package Player
+    {
+        class PlayerController
+        {
+
+        }
+    }
+
+    package InGame.Field
+    {
+        class FieldGenerator
+        {
+            + Tile[,] Generate()
+        }
+
+        class FieldManager
+        {
+            - Tile[,] tiles
+
+            - void Generate()
+            ' + Tile GetTile(int x, int z)
+        }
+
+        class TileObject
+        {
+            - int x
+            - int z
+            - Tile tile
+
+            + void Init(int x, int z, Tile tile)
+        }
+    }
+}
+
+FieldManager --> FieldGenerator
+FieldManager --> TileObject
+@enduml
