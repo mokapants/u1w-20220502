@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Data.Enum.Player;
 using DG.Tweening;
+using Repositories.Field;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private FieldRepository fieldRepository;
     private Transform playerTransform;
     private Vector3 currentPosition;
-    private float moveDistance = 1.25f; // 移動距離
     private float moveDuration = 0.1f; // 移動時間
     private float cubeScale;
     private Sequence moveSequence;
@@ -17,7 +18,15 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         playerTransform = transform;
-        currentPosition = playerTransform.position;
+        // 初期位置設定
+        var tileHalfDistance = fieldRepository.TileDistance / 2f;
+        var offset = new Vector3(tileHalfDistance, 0f, tileHalfDistance);
+        currentPosition = offset + new Vector3(
+            Mathf.CeilToInt(fieldRepository.FieldSize / 2) * fieldRepository.TileDistance,
+            0f,
+            Mathf.CeilToInt(fieldRepository.FieldSize / 2) * fieldRepository.TileDistance
+        );
+        playerTransform.position = currentPosition;
         cubeScale = playerTransform.localScale.x;
     }
 
@@ -36,15 +45,15 @@ public class PlayerController : MonoBehaviour
         switch (Input.inputString)
         {
             case "w":
-                return PlayerMoveType.FRONT;
+                return PlayerMoveType.Front;
             case "s":
-                return PlayerMoveType.BACK;
+                return PlayerMoveType.Back;
             case "a":
-                return PlayerMoveType.LEFT;
+                return PlayerMoveType.Left;
             case "d":
-                return PlayerMoveType.RIGHT;
+                return PlayerMoveType.Right;
             default:
-                return PlayerMoveType.IDLE;
+                return PlayerMoveType.Idle;
         }
     }
 
@@ -66,23 +75,23 @@ public class PlayerController : MonoBehaviour
         // 計算
         switch (playerMoveType)
         {
-            case PlayerMoveType.FRONT:
-                nextDirection.z = moveDistance;
+            case PlayerMoveType.Front:
+                nextDirection.z = fieldRepository.TileDistance;
                 rotateCenterPoint.x = distanceToCenter;
                 rotateForward.x = 1;
                 break;
-            case PlayerMoveType.BACK:
-                nextDirection.z = -moveDistance;
+            case PlayerMoveType.Back:
+                nextDirection.z = -fieldRepository.TileDistance;
                 rotateCenterPoint.x = -distanceToCenter;
                 rotateForward.x = -1;
                 break;
-            case PlayerMoveType.LEFT:
-                nextDirection.x = -moveDistance;
+            case PlayerMoveType.Left:
+                nextDirection.x = -fieldRepository.TileDistance;
                 rotateCenterPoint.z = distanceToCenter;
                 rotateForward.z = 1;
                 break;
-            case PlayerMoveType.RIGHT:
-                nextDirection.x = moveDistance;
+            case PlayerMoveType.Right:
+                nextDirection.x = fieldRepository.TileDistance;
                 rotateCenterPoint.z = -distanceToCenter;
                 rotateForward.z = -1;
                 break;

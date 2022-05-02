@@ -2,10 +2,10 @@
 {
     public enum PlayerMoveType
     {
-        IDLE,
-        FRONT,
-        BACK,
-        LEFT,
-        RIGHT
+        Idle,
+        Front,
+        Back,
+        Left,
+        Right
     }
 }
