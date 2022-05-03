@@ -1,13 +1,22 @@
 ﻿using System;
 using Data.ValueObjects.Field;
 using UnityEngine;
+using VContainer;
 
 namespace InGame.Field
 {
     public class FieldManager : MonoBehaviour
     {
-        [SerializeField] private FieldGenerator fieldGenerator;
+        private FieldGenerator fieldGenerator;
         private Tile[,] tiles;
+        
+        [Inject]
+        public void Constructor(
+            FieldGenerator fieldGenerator
+        )
+        {
+            this.fieldGenerator = fieldGenerator;
+        }
 
         private void Start()
         {

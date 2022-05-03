@@ -1,15 +1,24 @@
 ﻿using Data.ScriptableObjects.Field;
-using UnityEngine;
+using VContainer;
 
 namespace Repositories.Field
 {
-    public class FieldRepository : MonoBehaviour
+    public class FieldRepository
     {
-        [SerializeField] private FieldMasterData fieldMasterData;
+        private readonly FieldMasterData fieldMasterData;
 
+        // プロパティ
         public int FieldSize => fieldMasterData.FieldSize;
         public float TileDistance => fieldMasterData.TileDistance;
         public int MinTilePoint => fieldMasterData.MinTilePoint;
         public int MaxTilePoint => fieldMasterData.MaxTilePoint;
+
+        [Inject]
+        public FieldRepository(
+            FieldMasterData fieldMasterData
+        )
+        {
+            this.fieldMasterData = fieldMasterData;
+        }
     }
 }

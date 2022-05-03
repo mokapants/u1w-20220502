@@ -2,6 +2,7 @@
 using DG.Tweening;
 using Repositories.Field;
 using UnityEngine;
+using VContainer;
 
 namespace InGame.Player
 {
@@ -10,12 +11,20 @@ namespace InGame.Player
     /// </summary>
     public class PlayerAction : MonoBehaviour
     {
-        [SerializeField] private FieldRepository fieldRepository;
+        private FieldRepository fieldRepository;
         private Transform playerTransform;
         private Vector3 currentPosition;
         private float moveDuration = 0.1f; // 移動時間
         private float cubeScale;
         private Sequence moveSequence;
+
+        [Inject]
+        public void Constructor(
+            FieldRepository fieldRepository
+        )
+        {
+            this.fieldRepository = fieldRepository;
+        }
 
         private void Awake()
         {

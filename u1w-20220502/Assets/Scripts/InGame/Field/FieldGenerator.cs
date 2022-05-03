@@ -3,14 +3,23 @@ using Data.ValueObjects.Field;
 using Repositories.Field;
 using Unity.Mathematics;
 using UnityEngine;
+using VContainer;
 using Random = UnityEngine.Random;
 
 namespace InGame.Field
 {
     public class FieldGenerator : MonoBehaviour
     {
-        [SerializeField] private FieldRepository fieldRepository;
+        private FieldRepository fieldRepository;
         [SerializeField] private TileObject tileObject;
+
+        [Inject]
+        public void Constructor(
+            FieldRepository fieldRepository
+        )
+        {
+            this.fieldRepository = fieldRepository;
+        }
 
         /// <summary>
         /// タイルの生成を行う

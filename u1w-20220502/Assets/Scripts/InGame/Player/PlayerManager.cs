@@ -4,6 +4,7 @@ using InGame.Field;
 using Repositories.Field;
 using UniRx;
 using UnityEngine;
+using VContainer;
 
 namespace InGame.Player
 {
@@ -12,17 +13,31 @@ namespace InGame.Player
     /// </summary>
     public class PlayerManager : MonoBehaviour
     {
-        [SerializeField] private FieldRepository fieldRepository;
-        [SerializeField] private PlayerController playerController;
-        [SerializeField] private PlayerAction playerAction;
-        [SerializeField] private FieldManager fieldManager;
+        private FieldRepository fieldRepository;
+        private PlayerController playerController;
+        private PlayerAction playerAction;
+        private FieldManager fieldManager;
         private ReactiveProperty<(int x, int z)> positionProperty;
-        
+
         // イベント
         public IReadOnlyReactiveProperty<(int x, int z)> PositionProperty => positionProperty;
-        
+
         // プロパティ
         public (int x, int z) Position => positionProperty.Value;
+
+        [Inject]
+        public void Constructor(
+            FieldRepository fieldRepository,
+            PlayerController playerController,
+            PlayerAction playerAction,
+            FieldManager fieldManager
+        )
+        {
+            this.fieldRepository = fieldRepository;
+            this.playerController = playerController;
+            this.playerAction = playerAction;
+            this.fieldManager = fieldManager;
+        }
 
         private void Start()
         {
