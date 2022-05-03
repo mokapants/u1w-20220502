@@ -29,19 +29,39 @@ namespace InGame.Field
         }
 
         /// <summary>
-        /// 指定した座標にタイルが存在するかどうか
+        /// 配列内にタイルが存在するかどうか
         /// </summary>
         public bool IsExistsTile(int x, int z)
         {
             // フィールドの範囲内かどうか
             var isRangeX = 0 <= x && x < tileObjects.GetLength(0);
             var isRangeZ = 0 <= z && z < tileObjects.GetLength(1);
-            if (!(isRangeX && isRangeZ)) return false;
-            
-            // 範囲内
-            // TODO
+            return isRangeX && isRangeZ;
+        }
+
+        /// <summary>
+        /// 移動可能なタイルかどうか
+        /// </summary>
+        public bool IsMovableTile(int x, int z)
+        {
+            if (!IsExistsTile(x, z)) return false;
+
             // 移動できるタイルかどうか
+            if (!tileObjects[x, z].Tile.isWalkable) return false;
+
+            // 鍵が必要かどうか
+            if (tileObjects[x, z].Tile.isNeedKey) return false;
+
             return true;
+        }
+
+        /// <summary>
+        /// 鍵が必要なタイルかどうか
+        /// </summary>
+        public bool IsNeedKeyTile(int x, int z)
+        {
+            if (!IsExistsTile(x, z)) return false;
+            return tileObjects[x, z].Tile.isNeedKey;
         }
     }
 }

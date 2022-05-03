@@ -3,6 +3,7 @@ using System.IO;
 using Data.Enum.Field;
 using Data.ValueObjects.Field;
 using UnityEngine;
+using TT = Data.Enum.Field.TileType;
 
 namespace InGame.Field
 {
@@ -17,10 +18,10 @@ namespace InGame.Field
             // データだけ[z, x]の扱い
             fieldData.fieldTileDataArray = new []
             {
-                new FieldTileData(new [] {TileType.Wall, TileType.Wall, TileType.Wall, TileType.Wall}),
-                new FieldTileData(new [] {TileType.None, TileType.Goal, TileType.Ground, TileType.Ground}),
-                new FieldTileData(new [] {TileType.Wall, TileType.Wall, TileType.Door, TileType.Wall}),
-                new FieldTileData(new [] {TileType.Ground, TileType.Ground, TileType.Ground, TileType.Key})
+                new FieldTileData(new [] {TT.Wall, TT.Wall, TT.Wall, TT.Wall}),
+                new FieldTileData(new [] {TT.None, TT.Goal, TT.Ground, TT.Ground}),
+                new FieldTileData(new [] {TT.Wall, TT.Wall, TT.Door, TT.Wall}),
+                new FieldTileData(new [] {TT.Ground, TT.Ground, TT.Ground, TT.Key})
             };
 
             var path = $"{Application.dataPath}/Res/Master/Stage/Stage1.json";

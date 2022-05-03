@@ -20,6 +20,7 @@ namespace InGame.Player
         private FieldManager fieldManager;
         [SerializeField] private Transform goldPanelTransform;
         private ReactiveProperty<(int x, int z)> positionProperty;
+        private ReactiveProperty<int> keyNumberProperty;
         private int goldPanelFace = 1; // 上1 奥から時計回りに2,3,4,5 底6
 
         // イベント
@@ -27,6 +28,7 @@ namespace InGame.Player
 
         // プロパティ
         public (int x, int z) Position => positionProperty.Value;
+        public int KeyNumber => keyNumberProperty.Value;
         public bool IsBottomGoldPanel => goldPanelFace == 6;
 
         [Inject]
@@ -46,6 +48,7 @@ namespace InGame.Player
         private void Start()
         {
             positionProperty = new ReactiveProperty<(int x, int z)>();
+            keyNumberProperty = new ReactiveProperty<int>(1);
 
             // プレイヤーの移動入力を監視
             playerController.OnInputMovingKeyObservable.Subscribe(OnInputMovingKey).AddTo(this);
@@ -91,8 +94,15 @@ namespace InGame.Player
                     return;
             }
 
-            // タイルが存在しない場合は移動しない
-            if (!fieldManager.IsExistsTile(nextPlayerPosX, nextPlayerPosZ)) return;
+            // 通行不可能なタイルの場合は移動不可
+            if (!fieldManager.IsMovableTile(nextPlayerPosX, nextPlayerPosZ))
+            {
+                // 鍵が必要なタイルかつ、鍵を所持している場合以外は移動不可
+                if (!(fieldManager.IsNeedKeyTile(nextPlayerPosX, nextPlayerPosZ) && 0 < KeyNumber))
+                {
+                    return;
+                }
+            }
 
             // タイルが存在する場合
             UpdateGoldPanelFaceDirection(playerMoveType);

@@ -7,6 +7,9 @@ namespace Data.ValueObjects.Field
         public int X;
         public int Z;
         public TileType TileType;
+        public bool isWalkable;
+        public bool isNeedKey;
+        public bool isGettableKey;
 
         public Tile(int x, int z, TileType tileType)
         {

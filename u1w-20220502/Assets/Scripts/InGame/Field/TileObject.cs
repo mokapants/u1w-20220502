@@ -12,6 +12,9 @@ namespace InGame.Field
     public class TileObject : MonoBehaviour
     {
         private PlayerManager playerManager;
+        [SerializeField] private bool isWalkable;
+        [SerializeField] private bool isNeedKey;
+        [SerializeField] private bool isGettableKey;
         private Tile tile;
 
         // プロパティ
@@ -37,6 +40,9 @@ namespace InGame.Field
         public void Init(int x, int z, TileType tileType)
         {
             tile = new Tile(x, z, tileType);
+            tile.isWalkable = isWalkable;
+            tile.isNeedKey = isNeedKey;
+            tile.isGettableKey = isGettableKey;
         }
 
         /// <summary>
