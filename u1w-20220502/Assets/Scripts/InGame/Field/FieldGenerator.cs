@@ -11,7 +11,6 @@ namespace InGame.Field
     public class FieldGenerator : MonoBehaviour
     {
         private FieldRepository fieldRepository;
-        [SerializeField] private TileObject tileObject;
 
         [Inject]
         public void Constructor(
@@ -24,20 +23,22 @@ namespace InGame.Field
         /// <summary>
         /// タイルの生成を行う
         /// </summary>
-        public Tile[,] Generate()
+        public TileObject[,] Generate()
         {
-            var tiles = new Tile[fieldRepository.FieldSize, fieldRepository.FieldSize];
+            var tiles = new TileObject[fieldRepository.FieldSize, fieldRepository.FieldSize];
 
             var tileHalfDistance = fieldRepository.TileDistance / 2f;
             var offset = new Vector3(tileHalfDistance, -1f, tileHalfDistance);
-            for (var i = 0; i < fieldRepository.FieldSize; i++)
+            // for (var z = fieldRepository.FieldSize - 1; 0 <= z; z--)
+            for (var z = 0; z < fieldRepository.FieldSize; z++)
             {
-                for (var k = 0; k < fieldRepository.FieldSize; k++)
+                for (var x = 0; x < fieldRepository.FieldSize; x++)
                 {
-                    tiles[i, k] = new Tile(Random.Range(fieldRepository.MinTilePoint, fieldRepository.MaxTilePoint));
-                    var position = new Vector3(i * fieldRepository.TileDistance, 0f, k * fieldRepository.TileDistance);
-                    var instanceTileObject = Instantiate(tileObject, position + offset, quaternion.identity, transform);
-                    instanceTileObject.Init(i, k);
+                    var position = new Vector3(x * fieldRepository.TileDistance, 0f, z * fieldRepository.TileDistance);
+                    var tileType = fieldRepository.GetTileType(x, fieldRepository.FieldSize - 1 - z);
+                    var prefab = fieldRepository.GetTileObjectPrefab(tileType);
+                    tiles[x, z] = Instantiate(prefab, position + offset, Quaternion.identity, transform);
+                    tiles[x, z].Init(x, z, tileType);
                 }
             }
 

@@ -11,11 +11,7 @@ namespace InGame.Field
     {
         private FieldRepository fieldRepository;
         private FieldGenerator fieldGenerator;
-        private Tile[,] tiles;
-        private Subject<Tile>[,] tileSubjects;
-
-        // イベント
-        public IObservable<Tile>[,] TileObservable => tileSubjects;
+        private TileObject[,] tileObjects;
 
         [Inject]
         public void Constructor(
@@ -29,17 +25,7 @@ namespace InGame.Field
 
         private void Start()
         {
-            // 初期化
-            tileSubjects = new Subject<Tile>[fieldRepository.FieldSize, fieldRepository.FieldSize];
-            for (var i = 0; i < fieldRepository.FieldSize; i++)
-            {
-                for (var k = 0; k < fieldRepository.FieldSize; k++)
-                {
-                    tileSubjects[i, k] = new Subject<Tile>();
-                }
-            }
-
-            tiles = fieldGenerator.Generate();
+            tileObjects = fieldGenerator.Generate();
         }
 
         /// <summary>
@@ -47,28 +33,15 @@ namespace InGame.Field
         /// </summary>
         public bool IsExistsTile(int x, int z)
         {
-            var isRangeX = 0 <= x && x < tiles.GetLength(0);
-            var isRangeZ = 0 <= z && z < tiles.GetLength(1);
-            return isRangeX && isRangeZ;
-        }
-
-        /// <summary>
-        /// タイルを取得
-        /// </summary>
-        public Tile GetTile(int x, int z)
-        {
-            return IsExistsTile(x, z) ? tiles[x, z] : null;
-        }
-
-        /// <summary>
-        /// タイルの情報を設定
-        /// </summary>
-        public void SetTile(int x, int z, Tile tile)
-        {
-            if (!IsExistsTile(x, z)) return;
-
-            tiles[x, z] = tile;
-            tileSubjects[x, z].OnNext(tile);
+            // フィールドの範囲内かどうか
+            var isRangeX = 0 <= x && x < tileObjects.GetLength(0);
+            var isRangeZ = 0 <= z && z < tileObjects.GetLength(1);
+            if (!(isRangeX && isRangeZ)) return false;
+            
+            // 範囲内
+            // TODO
+            // 移動できるタイルかどうか
+            return true;
         }
     }
 }

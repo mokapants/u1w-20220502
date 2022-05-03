@@ -10,7 +10,9 @@ namespace LifetimeScopes
 {
     public class GameLifetimeScope : LifetimeScope
     {
+        [SerializeField] private string fieldDataPath;
         [SerializeField] private FieldMasterData fieldMasterData;
+        [SerializeField] private FieldPartsMasterData fieldPartsMasterData;
         [SerializeField] private FieldManager fieldManager;
         [SerializeField] private FieldGenerator fieldGenerator;
         [SerializeField] private PlayerManager playerManager;
@@ -20,8 +22,9 @@ namespace LifetimeScopes
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponent(fieldMasterData);
+            builder.RegisterComponent(fieldPartsMasterData);
             
-            builder.Register<FieldRepository>(Lifetime.Singleton);
+            builder.Register<FieldRepository>(Lifetime.Singleton).WithParameter(fieldDataPath);
 
             builder.RegisterComponent(fieldManager);
             builder.RegisterComponent(fieldGenerator);

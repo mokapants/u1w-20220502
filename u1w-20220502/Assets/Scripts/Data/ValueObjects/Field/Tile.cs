@@ -4,19 +4,15 @@ namespace Data.ValueObjects.Field
 {
     public class Tile
     {
-        public int Point;
-        public TileState TileState;
+        public int X;
+        public int Z;
+        public TileType TileType;
 
-        public Tile(int point, TileState tileState)
+        public Tile(int x, int z, TileType tileType)
         {
-            Point = point;
-            TileState = tileState;
-        }
-
-        public Tile(int point)
-        {
-            Point = point;
-            TileState = TileState.None;
+            X = x;
+            Z = z;
+            TileType = tileType;
         }
     }
 }

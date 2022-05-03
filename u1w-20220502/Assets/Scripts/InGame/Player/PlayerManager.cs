@@ -61,7 +61,7 @@ namespace InGame.Player
         /// </summary>
         private void InitPosition()
         {
-            positionProperty.Value = (fieldRepository.FieldSize / 2, fieldRepository.FieldSize / 2);
+            positionProperty.Value = fieldRepository.PlayerStartPoint;
 
             playerAction.InitPosition(Position.x, Position.z);
         }

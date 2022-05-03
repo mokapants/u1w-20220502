@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9753a70235241f4bcc3b8d411b7a665, type: 3}
   m_Name: FieldMasterData
   m_EditorClassIdentifier: 
-  fieldSize: 10
-  tileDistance: 2
-  minTilePoint: -10
-  maxTilePoint: 20
+  tileDistance: 1
