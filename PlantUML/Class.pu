@@ -37,10 +37,14 @@ package Repositories
         class FieldRepository
         {
             - FieldMasterData fieldMasterData
-            + int FieldSize;
+            + int FieldSize
+            + int MinTilePoint
+            + int MaxTilePoint
         }
     }
 }
+
+Repositories --> ScriptableObjects
 
 package InGame
 {
@@ -49,6 +53,19 @@ package InGame
         class PlayerController
         {
 
+        }
+
+        class PlayerManager
+        {
+            - ReactiveProperty<(int x, int z)> positionProperty
+            + IReadOnlyReactiveProperty<(int x, int z)> PositionProperty
+            + (int x, int z) Position
+        }
+
+        class PlayerAction
+        {
+            + void InitPosition(int x, int z)
+            + void Move(PlayerMoveType playerMoveType)
         }
     }
 
@@ -74,9 +91,12 @@ package InGame
             - Tile tile
 
             + void Init(int x, int z, Tile tile)
+            + 
         }
     }
 }
+
+InGame --> Repositories
 
 FieldManager --> FieldGenerator
 FieldManager --> TileObject
