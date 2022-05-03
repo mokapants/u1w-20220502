@@ -23,6 +23,9 @@ namespace InGame.Player
             cubeScale = playerTransform.localScale.x;
         }
 
+        /// <summary>
+        /// 初期位置を設定
+        /// </summary>
         public void InitPosition(int x, int z)
         {
             // 初期位置設定
