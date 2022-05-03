@@ -16,18 +16,25 @@ namespace InGame.Player
         [SerializeField] private PlayerController playerController;
         [SerializeField] private PlayerAction playerAction;
         [SerializeField] private FieldManager fieldManager;
-        private int playerPosX;
-        private int playerPosZ;
+        private ReactiveProperty<(int x, int z)> positionProperty;
+        
+        // イベント
+        public IReadOnlyReactiveProperty<(int x, int z)> PositionProperty => positionProperty;
+        
+        // プロパティ
+        public (int x, int z) Position => positionProperty.Value;
 
         private void Start()
         {
+            positionProperty = new ReactiveProperty<(int x, int z)>();
+
             // プレイヤーの移動入力を監視
             playerController.OnInputMovingKeyObservable.Subscribe(OnInputMovingKey);
-            
+
             // プレイヤーの初期位置を設定
             InitPosition();
 
-            Debug.Log($"CurrentPosition: {playerPosX}, {playerPosZ}");
+            Debug.Log($"CurrentPosition: {Position.x}, {Position.z}");
         }
 
         /// <summary>
@@ -35,10 +42,9 @@ namespace InGame.Player
         /// </summary>
         private void InitPosition()
         {
-            playerPosX = fieldRepository.FieldSize / 2;
-            playerPosZ = fieldRepository.FieldSize / 2;
-            
-            playerAction.InitPosition(playerPosX, playerPosZ);
+            positionProperty.Value = (fieldRepository.FieldSize / 2, fieldRepository.FieldSize / 2);
+
+            playerAction.InitPosition(Position.x, Position.z);
         }
 
         /// <summary>
@@ -46,8 +52,8 @@ namespace InGame.Player
         /// </summary>
         private void OnInputMovingKey(PlayerMoveType playerMoveType)
         {
-            var nextPlayerPosX = playerPosX;
-            var nextPlayerPosZ = playerPosZ;
+            var nextPlayerPosX = Position.x;
+            var nextPlayerPosZ = Position.z;
             switch (playerMoveType)
             {
                 case PlayerMoveType.Front:
@@ -68,12 +74,11 @@ namespace InGame.Player
 
             if (!fieldManager.IsExistsTile(nextPlayerPosX, nextPlayerPosZ)) return;
 
-            playerPosX = nextPlayerPosX;
-            playerPosZ = nextPlayerPosZ;
+            positionProperty.Value = (nextPlayerPosX, nextPlayerPosZ);
 
             playerAction.Move(playerMoveType);
-            
-            Debug.Log($"CurrentPosition: {playerPosX}, {playerPosZ}");
+
+            Debug.Log($"CurrentPosition: {Position.x}, {Position.z}");
         }
     }
 }
