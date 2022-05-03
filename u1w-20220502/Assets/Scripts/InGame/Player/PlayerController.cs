@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using Data.Enum.Player;
-using DG.Tweening;
-using Repositories.Field;
 using UniRx;
 using UnityEngine;
 

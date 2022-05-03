@@ -37,7 +37,7 @@ namespace InGame.Field
                     tiles[i, k] = new Tile(Random.Range(fieldRepository.MinTilePoint, fieldRepository.MaxTilePoint));
                     var position = new Vector3(i * fieldRepository.TileDistance, 0f, k * fieldRepository.TileDistance);
                     var instanceTileObject = Instantiate(tileObject, position + offset, quaternion.identity, transform);
-                    instanceTileObject.Init(i, k, tiles[i, k]);
+                    instanceTileObject.Init(i, k);
                 }
             }
 
