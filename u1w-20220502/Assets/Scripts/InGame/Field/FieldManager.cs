@@ -1,5 +1,6 @@
 ﻿using System;
 using Data.ValueObjects.Field;
+using Repositories.Core;
 using Repositories.Field;
 using UniRx;
 using UnityEngine;
@@ -9,18 +10,26 @@ namespace InGame.Field
 {
     public class FieldManager : MonoBehaviour
     {
+        private GameRepository gameRepository;
         private FieldRepository fieldRepository;
         private FieldGenerator fieldGenerator;
         private TileObject[,] tileObjects;
 
         [Inject]
         public void Constructor(
+            GameRepository gameRepository,
             FieldRepository fieldRepository,
             FieldGenerator fieldGenerator
         )
         {
+            this.gameRepository = gameRepository;
             this.fieldRepository = fieldRepository;
             this.fieldGenerator = fieldGenerator;
+        }
+
+        private void Awake()
+        {
+            fieldRepository.LoadFieldData(gameRepository.CurrentStageId);
         }
 
         private void Start()

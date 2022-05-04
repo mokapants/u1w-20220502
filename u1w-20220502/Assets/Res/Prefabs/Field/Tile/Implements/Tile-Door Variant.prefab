@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile-Door Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2655128498688388718, guid: 8db867d104771e247b9f413db7ee6755, type: 3}
+      propertyPath: tileObject
+      value: 
+      objectReference: {fileID: -5309105587252338}
     - target: {fileID: 5035048821154082358, guid: 8db867d104771e247b9f413db7ee6755, type: 3}
       propertyPath: isNeedKey
       value: 1
@@ -67,5 +71,26 @@ PrefabInstance:
       propertyPath: isWalkable
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5035048821154082358, guid: 8db867d104771e247b9f413db7ee6755, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8db867d104771e247b9f413db7ee6755, type: 3}
+--- !u!1 &8924351274982206196 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 554913025666435305, guid: 8db867d104771e247b9f413db7ee6755, type: 3}
+  m_PrefabInstance: {fileID: 8965215809769808413}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-5309105587252338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8924351274982206196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61c6e9e3f51742d9ae63242101a37793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWalkable: 1
+  isNeedKey: 1
+  isGettableKey: 0

@@ -692,7 +692,7 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  fieldDataPath: Stage1
+  stageMasterData: {fileID: 11400000, guid: fc160d7705a2aeb47b5ed652917ac3f4, type: 2}
   fieldMasterData: {fileID: 11400000, guid: 7629db08877e55847af09938fa693aa1, type: 2}
   fieldPartsMasterData: {fileID: 11400000, guid: 2f2b087db994bdc4f8199cd2d8aefc99, type: 2}
   fieldManager: {fileID: 1789330681}

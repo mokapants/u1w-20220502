@@ -63,5 +63,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile-Wall Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2655128498688388718, guid: 8db867d104771e247b9f413db7ee6755, type: 3}
+      propertyPath: tileObject
+      value: 
+      objectReference: {fileID: -714757805074959858}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8db867d104771e247b9f413db7ee6755, type: 3}
+--- !u!1 &6014346159731753379 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 554913025666435305, guid: 8db867d104771e247b9f413db7ee6755, type: 3}
+  m_PrefabInstance: {fileID: 6108092221655746890}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-714757805074959858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014346159731753379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59bd6f2cc8a543efa5341b6fa6cb4db1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWalkable: 0
+  isNeedKey: 0
+  isGettableKey: 0

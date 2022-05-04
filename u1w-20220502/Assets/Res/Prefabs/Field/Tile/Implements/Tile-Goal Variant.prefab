@@ -59,9 +59,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile-Goal Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2655128498688388718, guid: 8db867d104771e247b9f413db7ee6755, type: 3}
+      propertyPath: tileObject
+      value: 
+      objectReference: {fileID: 5416970133917321432}
     - target: {fileID: 5035048821154082358, guid: 8db867d104771e247b9f413db7ee6755, type: 3}
       propertyPath: isWalkable
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8db867d104771e247b9f413db7ee6755, type: 3}
+--- !u!1 &7558233303772970439 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 554913025666435305, guid: 8db867d104771e247b9f413db7ee6755, type: 3}
+  m_PrefabInstance: {fileID: 8022968474538079534}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5416970133917321432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7558233303772970439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3793227a2b4069bb9d5102b6917daf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWalkable: 1
+  isNeedKey: 0
+  isGettableKey: 0

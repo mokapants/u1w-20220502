@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Data.Enum.Field;
 using Data.ScriptableObjects.Field;
+using Data.ScriptableObjects.Stage;
 using Data.ValueObjects.Field;
 using InGame.Field;
 using UniRx;
@@ -13,6 +14,7 @@ namespace Repositories.Field
 {
     public class FieldRepository
     {
+        private readonly StageMasterData stageMasterData;
         private readonly FieldMasterData fieldMasterData;
         private readonly FieldPartsMasterData fieldPartsMasterData;
         private FieldData fieldData;
@@ -28,24 +30,23 @@ namespace Repositories.Field
 
         [Inject]
         public FieldRepository(
+            StageMasterData stageMasterData,
             FieldMasterData fieldMasterData,
-            FieldPartsMasterData fieldPartsMasterData,
-            string fieldDataPath
+            FieldPartsMasterData fieldPartsMasterData
         )
         {
+            this.stageMasterData = stageMasterData;
             this.fieldMasterData = fieldMasterData;
             this.fieldPartsMasterData = fieldPartsMasterData;
-            fieldData = GetFieldData(fieldDataPath);
         }
 
         /// <summary>
         /// フィールドデータを取得
         /// </summary>
-        private FieldData GetFieldData(string path)
+        public void LoadFieldData(int stageId)
         {
-            var handle = Addressables.LoadAssetAsync<TextAsset>(path);
-            var data = handle.WaitForCompletion();
-            return JsonUtility.FromJson<FieldData>(data.text);
+            var data = stageMasterData.StageDataList[stageId];
+            fieldData = JsonUtility.FromJson<FieldData>(data.text);
         }
 
         /// <summary>

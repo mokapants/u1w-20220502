@@ -2,6 +2,7 @@
 using Data.Enum.Field;
 using Data.ValueObjects.Field;
 using InGame.Player;
+using Repositories.Core;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,20 +12,23 @@ namespace InGame.Field
 {
     public class TileObject : MonoBehaviour
     {
-        private PlayerManager playerManager;
+        protected GameRepository gameRepository;
+        protected PlayerManager playerManager;
         [SerializeField] private bool isWalkable;
         [SerializeField] private bool isNeedKey;
         [SerializeField] private bool isGettableKey;
-        private Tile tile;
+        protected Tile tile;
 
         // プロパティ
         public Tile Tile => tile;
 
         [Inject]
         public void Constructor(
+            GameRepository gameRepository,
             PlayerManager playerManager
         )
         {
+            this.gameRepository = gameRepository;
             this.playerManager = playerManager;
         }
 

@@ -284,7 +284,6 @@ GameObject:
   m_Component:
   - component: {fileID: 554913025666435304}
   - component: {fileID: 2655128498688388718}
-  - component: {fileID: 5035048821154082358}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -324,19 +323,7 @@ MonoBehaviour:
     TypeName: LifetimeScopes.GameLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
-  tileObject: {fileID: 5035048821154082358}
---- !u!114 &5035048821154082358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554913025666435305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59bd6f2cc8a543efa5341b6fa6cb4db1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  tileObject: {fileID: 0}
 --- !u!1 &8646713599600857873
 GameObject:
   m_ObjectHideFlags: 0

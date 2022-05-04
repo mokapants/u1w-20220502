@@ -48,7 +48,7 @@ namespace InGame.Player
         private void Start()
         {
             positionProperty = new ReactiveProperty<(int x, int z)>();
-            keyNumberProperty = new ReactiveProperty<int>(1);
+            keyNumberProperty = new ReactiveProperty<int>(0);
 
             // プレイヤーの移動入力を監視
             playerController.OnInputMovingKeyObservable.Subscribe(OnInputMovingKey).AddTo(this);
@@ -67,6 +67,22 @@ namespace InGame.Player
             positionProperty.Value = fieldRepository.PlayerStartPoint;
 
             playerAction.InitPosition(Position.x, Position.z);
+        }
+
+        /// <summary>
+        /// 鍵を入手
+        /// </summary>
+        public void OnGotKey()
+        {
+            keyNumberProperty.Value++;
+        }
+
+        /// <summary>
+        /// 鍵を使用
+        /// </summary>
+        public void OnUsedKey()
+        {
+            keyNumberProperty.Value--;
         }
 
         /// <summary>
@@ -114,6 +130,9 @@ namespace InGame.Player
             Debug.Log($"CurrentPosition: {Position.x}, {Position.z}");
         }
 
+        /// <summary>
+        /// ゴールドパネルの向きを計算
+        /// </summary>
         private void UpdateGoldPanelFaceDirection(PlayerMoveType playerMoveType)
         {
             switch (playerMoveType)
