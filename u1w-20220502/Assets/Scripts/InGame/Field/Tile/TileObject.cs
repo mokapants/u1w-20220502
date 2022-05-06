@@ -15,8 +15,6 @@ namespace InGame.Field
         protected GameRepository gameRepository;
         protected PlayerManager playerManager;
         [SerializeField] private bool isWalkable;
-        [SerializeField] private bool isNeedKey;
-        [SerializeField] private bool isGettableKey;
         protected Tile tile;
 
         // プロパティ
@@ -45,8 +43,6 @@ namespace InGame.Field
         {
             tile = new Tile(x, z, tileType);
             tile.isWalkable = isWalkable;
-            tile.isNeedKey = isNeedKey;
-            tile.isGettableKey = isGettableKey;
         }
 
         /// <summary>
