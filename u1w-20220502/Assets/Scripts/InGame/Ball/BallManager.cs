@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace InGame.Ball
+{
+    public class BallManager : MonoBehaviour
+    {
+        [SerializeField] private Ball ballPrefab;
+        [SerializeField] private Transform ballPoolParent;
+        private Queue<Ball> ballPool;
+
+        private void Start()
+        {
+            InitBall();
+        }
+
+        private void InitBall()
+        {
+            var ballNum = 100;
+            ballPool = new Queue<Ball>();
+            for (var i = 0; i < ballNum; i++)
+            {
+                var ball = Instantiate(ballPrefab, new Vector3(-1000, -1000, 0), Quaternion.identity, ballPoolParent);
+                ball.SetStatus(false);
+                ballPool.Enqueue(ball);
+                
+            }
+        }
+
+        /// <summary>
+        /// ボールをプールにためる
+        /// </summary>
+        public void EnqueueBall(Ball ball)
+        {
+            ball.SetStatus(false);
+            ballPool.Enqueue(ball);
+        }
+
+        /// <summary>
+        /// ボールを特定の場所に呼び出す
+        /// </summary>
+        public void SetBall(Vector3 position, int number = 1)
+        {
+            for (var i = 0; i < number; i++)
+            {
+                var ball = ballPool.Dequeue();
+                ball.SetStatus(true);
+                ball.SetPosition(position);
+            }
+        }
+    }
+}
