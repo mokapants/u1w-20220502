@@ -16,14 +16,6 @@ MonoBehaviour:
   - TileType: 0
     TileObject: {fileID: -8645124111317692639, guid: 0d660940cc793d24892fb6f49143ee55, type: 3}
   - TileType: 1
-    TileObject: {fileID: 5416970133917321432, guid: e5d3ad66137511c4cac832276f8e48c2, type: 3}
-  - TileType: 2
-    TileObject: {fileID: 7485334040171205405, guid: 11072134a856cc44b86428fa6c584acb, type: 3}
-  - TileType: 10
-    TileObject: {fileID: -538861572017581174, guid: 0b50ceeb8b3cf8741be5f3d015d6df30, type: 3}
-  - TileType: 50
     TileObject: {fileID: -714757805074959858, guid: 613785b46c9efb040aa16beb0436a547, type: 3}
-  - TileType: 100
-    TileObject: {fileID: -5309105587252338, guid: 806ee418562345d46a8d05c4c25c227d, type: 3}
-  - TileType: 101
-    TileObject: {fileID: 2450667795379795155, guid: 8e651ce8930d5994dbbde60489033aff, type: 3}
+  - TileType: 2
+    TileObject: {fileID: -538861572017581174, guid: 0b50ceeb8b3cf8741be5f3d015d6df30, type: 3}

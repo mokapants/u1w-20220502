@@ -39,8 +39,7 @@ namespace InGame.Player
         {
             // 初期位置設定
             var tileHalfDistance = fieldRepository.TileDistance / 2f;
-            var offset = new Vector3(tileHalfDistance, 0f, tileHalfDistance);
-            currentPosition = offset + new Vector3(x * fieldRepository.TileDistance, 0f, z * fieldRepository.TileDistance);
+            currentPosition = new Vector3(x * fieldRepository.TileDistance, z * fieldRepository.TileDistance,0f);
             playerTransform.position = currentPosition;
         }
 
@@ -56,31 +55,31 @@ namespace InGame.Player
             var nextDirection = Vector3.zero;
             // 回転
             var rotateCenterPoint = currentPosition;
-            rotateCenterPoint.y = 0f;
+            rotateCenterPoint.z = 0f;
             var distanceToCenter = cubeScale / 2f;
             var rotateForward = Vector3.zero;
             // 計算
             switch (playerMoveType)
             {
                 case PlayerMoveType.Front:
-                    nextDirection.z = fieldRepository.TileDistance;
+                    nextDirection.y = fieldRepository.TileDistance;
                     rotateCenterPoint.x = distanceToCenter;
                     rotateForward.x = 1;
                     break;
                 case PlayerMoveType.Back:
-                    nextDirection.z = -fieldRepository.TileDistance;
+                    nextDirection.y = -fieldRepository.TileDistance;
                     rotateCenterPoint.x = -distanceToCenter;
                     rotateForward.x = -1;
                     break;
                 case PlayerMoveType.Left:
                     nextDirection.x = -fieldRepository.TileDistance;
-                    rotateCenterPoint.z = distanceToCenter;
-                    rotateForward.z = 1;
+                    rotateCenterPoint.y = distanceToCenter;
+                    rotateForward.y = 1;
                     break;
                 case PlayerMoveType.Right:
                     nextDirection.x = fieldRepository.TileDistance;
-                    rotateCenterPoint.z = -distanceToCenter;
-                    rotateForward.z = -1;
+                    rotateCenterPoint.y = -distanceToCenter;
+                    rotateForward.y = -1;
                     break;
                 default:
                     break;

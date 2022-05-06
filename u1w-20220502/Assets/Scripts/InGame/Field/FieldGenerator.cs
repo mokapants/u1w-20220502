@@ -27,14 +27,12 @@ namespace InGame.Field
         {
             var tiles = new TileObject[fieldRepository.FieldSize, fieldRepository.FieldSize];
 
-            var tileHalfDistance = fieldRepository.TileDistance / 2f;
-            var offset = new Vector3(tileHalfDistance, -1f, tileHalfDistance);
-            // for (var z = fieldRepository.FieldSize - 1; 0 <= z; z--)
+            var offset = new Vector3(0f, 0f, fieldRepository.TileDistance);
             for (var z = 0; z < fieldRepository.FieldSize; z++)
             {
                 for (var x = 0; x < fieldRepository.FieldSize; x++)
                 {
-                    var position = new Vector3(x * fieldRepository.TileDistance, 0f, z * fieldRepository.TileDistance);
+                    var position = new Vector3(x * fieldRepository.TileDistance, z * fieldRepository.TileDistance, 0f);
                     var tileType = fieldRepository.GetTileType(x, fieldRepository.FieldSize - 1 - z);
                     var prefab = fieldRepository.GetTileObjectPrefab(tileType);
                     tiles[x, z] = Instantiate(prefab, position + offset, Quaternion.identity, transform);
