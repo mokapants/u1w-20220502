@@ -1,15 +1,22 @@
 ﻿using System;
+using Cysharp.Threading.Tasks;
+using Repositories.Core;
 using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using VContainer;
 
 namespace InGame.Core
 {
     public class GameManager : MonoBehaviour
     {
+        private GameRepository gameRepository;
         private bool isPlaying = true;
+        private float elapsedTime;
         private ReactiveProperty<int> scoreProperty;
         private ReactiveProperty<int> jackPotProperty;
         private Subject<int> onJackPotSubject;
+        private static readonly int MaxScore = 100;
 
         // イベント
         public IReadOnlyReactiveProperty<int> ScoreProperty => scoreProperty;
@@ -21,6 +28,14 @@ namespace InGame.Core
         public int Score => scoreProperty.Value;
         public int JackPotScore => jackPotProperty.Value;
 
+        [Inject]
+        public void Constructor(
+            GameRepository gameRepository
+        )
+        {
+            this.gameRepository = gameRepository;
+        }
+
         private void Awake()
         {
             scoreProperty = new ReactiveProperty<int>(0);
@@ -30,6 +45,9 @@ namespace InGame.Core
 
         private void Start()
         {
+            // タイムを初期化
+            elapsedTime = 0f;
+
             // スコアがゾロ目の時にジャックポットが起きる
             scoreProperty.Subscribe(score =>
             {
@@ -38,6 +56,23 @@ namespace InGame.Core
                     DoJackPot();
                 }
             }).AddTo(this);
+
+            // スコアが100,000に達したら終了
+            scoreProperty.Subscribe(score =>
+            {
+                if (!isPlaying) return;
+                if (MaxScore <= score)
+                {
+                    OnFinish();
+                }
+            });
+        }
+
+        private void Update()
+        {
+            if (!IsPlaying) return;
+
+            elapsedTime += Time.deltaTime;
         }
 
         /// <summary>
@@ -65,11 +100,24 @@ namespace InGame.Core
         }
 
         /// <summary>
+        /// 設定されたスコアに到達したとき
+        /// </summary>
+        private async UniTask OnFinish()
+        {
+            isPlaying = false;
+            gameRepository.SaveScore(elapsedTime);
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(1f));
+
+            SceneManager.LoadScene("Result");
+        }
+
+        /// <summary>
         /// スコアを加算
         /// </summary>
         public void AddScore(int score = 1)
         {
-            scoreProperty.Value += score;
+            scoreProperty.Value = Mathf.Clamp(Score + score, 0, MaxScore);
         }
 
         /// <summary>

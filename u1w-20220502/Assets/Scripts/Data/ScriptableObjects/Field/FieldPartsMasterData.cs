@@ -12,7 +12,7 @@ namespace Data.ScriptableObjects.Field
         [SerializeField] private List<FieldParts> fieldPartsList;
 
         // プロパティ
-        private List<FieldParts> copyFieldPartsList;
+        private List<FieldParts> copyFieldPartsList = new List<FieldParts>();
 
         public List<FieldParts> FieldPartsList
         {

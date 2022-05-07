@@ -9,7 +9,7 @@ namespace Data.ScriptableObjects.Stage
         [SerializeField] private List<TextAsset> stageDataList;
         
         // プロパティ
-        private List<TextAsset> copyStageDataList;
+        private List<TextAsset> copyStageDataList = new List<TextAsset>();
 
         public List<TextAsset> StageDataList
         {
