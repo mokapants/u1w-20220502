@@ -12,33 +12,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: "\u30DE\u30C6\u30EA\u30A2\u30EB"
-    second: {fileID: 2100000, guid: 6a5a4dee630a1e6439b9a69b055b527b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "\u30DE\u30C6\u30EA\u30A2\u30EB.001"
-    second: {fileID: 2100000, guid: 66dfd85a13cb9c64c9ab6a533e993939, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "\u30DE\u30C6\u30EA\u30A2\u30EB.002"
-    second: {fileID: 2100000, guid: 0e12f4180fbe382478654839448cd7b0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "\u30DE\u30C6\u30EA\u30A2\u30EB.003"
-    second: {fileID: 2100000, guid: 39dd7dd1498ac1e4982d8ab5df435f15, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "\u30DE\u30C6\u30EA\u30A2\u30EB.004"
-    second: {fileID: 2100000, guid: 75db6a728a5d3454c877e72fcd83b2a7, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "\u30DE\u30C6\u30EA\u30A2\u30EB.005"
-    second: {fileID: 2100000, guid: ade01a1cdbcba0848a1c2ebc12ad4d25, type: 2}
+      name: "\u30DE\u30C6\u30EA\u30A2\u30EB.006"
+    second: {fileID: 2100000, guid: 66735bfd97a21c741bf2fb865764970d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

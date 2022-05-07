@@ -6,6 +6,8 @@ using InGame.Field;
 using InGame.Player;
 using Repositories.Core;
 using Repositories.Field;
+using UI.Presenters.Field.JackPot;
+using UI.Presenters.Field.Score;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -14,9 +16,12 @@ namespace LifetimeScopes
 {
     public class GameLifetimeScope : LifetimeScope
     {
+        // Data
         [SerializeField] private StageMasterData stageMasterData;
         [SerializeField] private FieldMasterData fieldMasterData;
         [SerializeField] private FieldPartsMasterData fieldPartsMasterData;
+
+        // InGame
         [SerializeField] private GameManager gameManager;
         [SerializeField] private FieldManager fieldManager;
         [SerializeField] private FieldGenerator fieldGenerator;
@@ -25,6 +30,10 @@ namespace LifetimeScopes
         [SerializeField] private PlayerAction playerAction;
         [SerializeField] private BallManager ballManager;
         [SerializeField] private BallDropper ballDropper;
+
+        // UI
+        [SerializeField] private ScorePresenter scorePresenter;
+        [SerializeField] private JackPotPresenter jackPotPresenter;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -43,6 +52,9 @@ namespace LifetimeScopes
             builder.RegisterComponent(playerAction);
             builder.RegisterComponent(ballManager);
             builder.RegisterComponent(ballDropper);
+
+            builder.RegisterComponent(scorePresenter);
+            builder.RegisterComponent(jackPotPresenter);
         }
     }
 }

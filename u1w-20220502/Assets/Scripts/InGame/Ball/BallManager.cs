@@ -17,14 +17,13 @@ namespace InGame.Ball
 
         private void InitBall()
         {
-            var ballNum = 100;
+            var ballNum = 500;
             ballPool = new Queue<Ball>();
             for (var i = 0; i < ballNum; i++)
             {
                 var ball = Instantiate(ballPrefab, new Vector3(-1000, -1000, 0), Quaternion.identity, ballPoolParent);
                 ball.SetStatus(false);
                 ballPool.Enqueue(ball);
-                
             }
         }
 
@@ -44,6 +43,7 @@ namespace InGame.Ball
         {
             for (var i = 0; i < number; i++)
             {
+                if (ballPool.Count <= 0) return;
                 var ball = ballPool.Dequeue();
                 ball.SetStatus(true);
                 ball.SetPosition(position);
