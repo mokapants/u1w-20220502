@@ -12,20 +12,24 @@ namespace InGame.Core
     public class GameManager : CoreManager
     {
         private GameRepository gameRepository;
+        private bool isReady = true;
         private bool isPlaying = true;
-        private float elapsedTime;
+        private ReactiveProperty<float> elapsedTimeProperty;
         private ReactiveProperty<int> scoreProperty;
         private ReactiveProperty<int> jackPotProperty;
         private Subject<int> onJackPotSubject;
         private static readonly int MaxScore = 100;
 
         // イベント
+        public IReadOnlyReactiveProperty<float> ElapsedTimeProperty => elapsedTimeProperty;
         public IReadOnlyReactiveProperty<int> ScoreProperty => scoreProperty;
         public IReadOnlyReactiveProperty<int> JackPotProperty => jackPotProperty;
         public IObservable<int> OnJackPotObservable => onJackPotSubject;
 
         // プロパティ
+        public bool IsReady => isReady;
         public bool IsPlaying => isPlaying;
+        public float ElapsedTime => elapsedTimeProperty.Value;
         public int Score => scoreProperty.Value;
         public int JackPotScore => jackPotProperty.Value;
 
@@ -39,6 +43,7 @@ namespace InGame.Core
 
         private void Awake()
         {
+            elapsedTimeProperty = new ReactiveProperty<float>(0f);
             scoreProperty = new ReactiveProperty<int>(0);
             jackPotProperty = new ReactiveProperty<int>(0);
             onJackPotSubject = new Subject<int>();
@@ -48,8 +53,7 @@ namespace InGame.Core
         {
             base.Start();
 
-            // タイムを初期化
-            elapsedTime = 0f;
+            StartTimer().Forget();
 
             // スコアがゾロ目の時にジャックポットが起きる
             scoreProperty.Subscribe(score =>
@@ -73,9 +77,19 @@ namespace InGame.Core
 
         private void Update()
         {
-            if (!IsPlaying) return;
+            if (isReady || !IsPlaying) return;
 
-            elapsedTime += Time.deltaTime;
+            elapsedTimeProperty.Value += Time.deltaTime;
+        }
+
+        /// <summary>
+        /// ゲームスタート
+        /// </summary>
+        private async UniTask StartTimer()
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(3f));
+
+            isReady = false;
         }
 
         /// <summary>
@@ -108,9 +122,12 @@ namespace InGame.Core
         private async UniTask OnFinish()
         {
             isPlaying = false;
-            gameRepository.SaveScore(elapsedTime);
-            PlayLoadAnySceneAnimation();
+            gameRepository.SaveScore(ElapsedTime);
 
+            await UniTask.Delay(TimeSpan.FromSeconds(2f));
+            
+            PlayLoadAnySceneAnimation();
+            
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
 
             SceneManager.LoadScene("Result");

@@ -41,6 +41,8 @@ namespace InGame.Ball
         /// </summary>
         private async UniTask AutoDropBallTask()
         {
+            await UniTask.WaitWhile(() => gameManager.IsReady);
+            
             while (gameManager.IsPlaying)
             {
                 ballManager.SetBall(BallDropPoint);

@@ -8,6 +8,7 @@ using Repositories.Core;
 using Repositories.Field;
 using UI.Presenters.Field.JackPot;
 using UI.Presenters.Field.Score;
+using UI.Presenters.InGame.Field.Timer;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -34,6 +35,7 @@ namespace LifetimeScopes
         // UI
         [SerializeField] private ScorePresenter scorePresenter;
         [SerializeField] private JackPotPresenter jackPotPresenter;
+        [SerializeField] private TimerPresenter timerPresenter;
 
         protected override void Configure(IContainerBuilder builder)
         {
@@ -55,6 +57,7 @@ namespace LifetimeScopes
 
             builder.RegisterComponent(scorePresenter);
             builder.RegisterComponent(jackPotPresenter);
+            builder.RegisterComponent(timerPresenter);
         }
     }
 }

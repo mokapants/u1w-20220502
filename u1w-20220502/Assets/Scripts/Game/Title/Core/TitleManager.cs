@@ -1,7 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
 using Game.Base.Core;
-using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
