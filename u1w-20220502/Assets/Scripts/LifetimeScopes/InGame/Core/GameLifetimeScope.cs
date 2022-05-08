@@ -23,8 +23,8 @@ namespace LifetimeScopes
 
         // InGame
         [SerializeField] private GameManager gameManager;
-        [SerializeField] private FieldManager fieldManager;
-        [SerializeField] private FieldGenerator fieldGenerator;
+        [SerializeField] private InGameFieldManager inGameFieldManager;
+        [SerializeField] private InGameFieldGenerator inGameFieldGenerator;
         [SerializeField] private PlayerManager playerManager;
         [SerializeField] private PlayerController playerController;
         [SerializeField] private PlayerAction playerAction;
@@ -45,8 +45,8 @@ namespace LifetimeScopes
             builder.Register<FieldRepository>(Lifetime.Singleton);
 
             builder.RegisterComponent(gameManager);
-            builder.RegisterComponent(fieldManager);
-            builder.RegisterComponent(fieldGenerator);
+            builder.RegisterComponent(inGameFieldManager);
+            builder.RegisterComponent(inGameFieldGenerator);
             builder.RegisterComponent(playerManager);
             builder.RegisterComponent(playerController);
             builder.RegisterComponent(playerAction);

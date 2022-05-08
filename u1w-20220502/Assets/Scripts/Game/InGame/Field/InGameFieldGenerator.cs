@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace InGame.Field
 {
-    public class FieldGenerator : MonoBehaviour
+    public class InGameFieldGenerator : MonoBehaviour
     {
         private FieldRepository fieldRepository;
 

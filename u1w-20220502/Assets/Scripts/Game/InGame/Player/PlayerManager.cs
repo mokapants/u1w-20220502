@@ -17,7 +17,7 @@ namespace InGame.Player
         private FieldRepository fieldRepository;
         private PlayerController playerController;
         private PlayerAction playerAction;
-        private FieldManager fieldManager;
+        private InGameFieldManager inGameFieldManager;
         private ReactiveProperty<(int x, int z)> positionProperty;
 
         // イベント
@@ -31,13 +31,13 @@ namespace InGame.Player
             FieldRepository fieldRepository,
             PlayerController playerController,
             PlayerAction playerAction,
-            FieldManager fieldManager
+            InGameFieldManager inGameFieldManager
         )
         {
             this.fieldRepository = fieldRepository;
             this.playerController = playerController;
             this.playerAction = playerAction;
-            this.fieldManager = fieldManager;
+            this.inGameFieldManager = inGameFieldManager;
         }
 
         private void Start()
@@ -89,7 +89,7 @@ namespace InGame.Player
             }
 
             // 通行不可能なタイルの場合は移動不可
-            if (!fieldManager.IsMovableTile(nextPlayerPosX, nextPlayerPosZ))
+            if (!inGameFieldManager.IsMovableTile(nextPlayerPosX, nextPlayerPosZ))
             {
                 return;
             }

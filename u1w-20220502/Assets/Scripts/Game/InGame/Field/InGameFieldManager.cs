@@ -8,23 +8,23 @@ using VContainer;
 
 namespace InGame.Field
 {
-    public class FieldManager : MonoBehaviour
+    public class InGameFieldManager : MonoBehaviour
     {
         private GameRepository gameRepository;
         private FieldRepository fieldRepository;
-        private FieldGenerator fieldGenerator;
+        private InGameFieldGenerator inGameFieldGenerator;
         private TileObject[,] tileObjects;
 
         [Inject]
         public void Constructor(
             GameRepository gameRepository,
             FieldRepository fieldRepository,
-            FieldGenerator fieldGenerator
+            InGameFieldGenerator inGameFieldGenerator
         )
         {
             this.gameRepository = gameRepository;
             this.fieldRepository = fieldRepository;
-            this.fieldGenerator = fieldGenerator;
+            this.inGameFieldGenerator = inGameFieldGenerator;
         }
 
         private void Awake()
@@ -34,7 +34,7 @@ namespace InGame.Field
 
         private void Start()
         {
-            tileObjects = fieldGenerator.Generate();
+            tileObjects = inGameFieldGenerator.Generate();
         }
         
         /// <summary>

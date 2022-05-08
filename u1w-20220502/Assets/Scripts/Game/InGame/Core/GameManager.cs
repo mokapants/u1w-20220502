@@ -1,5 +1,6 @@
 ﻿using System;
 using Cysharp.Threading.Tasks;
+using Game.Base.Core;
 using Repositories.Core;
 using UniRx;
 using UnityEngine;
@@ -8,7 +9,7 @@ using VContainer;
 
 namespace InGame.Core
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : CoreManager
     {
         private GameRepository gameRepository;
         private bool isPlaying = true;
@@ -43,8 +44,10 @@ namespace InGame.Core
             onJackPotSubject = new Subject<int>();
         }
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+
             // タイムを初期化
             elapsedTime = 0f;
 
@@ -57,7 +60,7 @@ namespace InGame.Core
                 }
             }).AddTo(this);
 
-            // スコアが100,000に達したら終了
+            // スコアがMaxScoreに達したら終了
             scoreProperty.Subscribe(score =>
             {
                 if (!isPlaying) return;
@@ -106,7 +109,8 @@ namespace InGame.Core
         {
             isPlaying = false;
             gameRepository.SaveScore(elapsedTime);
-            
+            PlayLoadAnySceneAnimation();
+
             await UniTask.Delay(TimeSpan.FromSeconds(1f));
 
             SceneManager.LoadScene("Result");
