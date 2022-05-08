@@ -39,15 +39,13 @@ namespace InGame.Ball
         /// <summary>
         /// ボールを特定の場所に呼び出す
         /// </summary>
-        public void SetBall(Vector3 position, int number = 1)
+        public Ball SetBall(Vector3 position)
         {
-            for (var i = 0; i < number; i++)
-            {
-                if (ballPool.Count <= 0) return;
-                var ball = ballPool.Dequeue();
-                ball.SetStatus(true);
-                ball.SetPosition(position);
-            }
+            if (ballPool.Count <= 0) return null;
+            var ball = ballPool.Dequeue();
+            ball.SetStatus(true);
+            ball.SetPosition(position);
+            return ball;
         }
     }
 }

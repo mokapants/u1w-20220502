@@ -5,6 +5,7 @@ using InGame.Core;
 using InGame.Field.Panel;
 using UnityEngine;
 using VContainer;
+using Random = UnityEngine.Random;
 
 namespace InGame.Ball
 {
@@ -26,7 +27,7 @@ namespace InGame.Ball
             this.gameManager = gameManager;
             this.ballManager = ballManager;
         }
-        
+
         private void Awake()
         {
             SetStatus(false);
@@ -42,6 +43,11 @@ namespace InGame.Ball
             if (collision.gameObject.CompareTag("JackPot"))
             {
                 OnCollisionEnterJackPot();
+            }
+
+            if (collision.gameObject.CompareTag("Bumper"))
+            {
+                OnCollisionEnterBumper(collision.transform.position);
             }
         }
 
@@ -91,12 +97,29 @@ namespace InGame.Ball
         }
 
         /// <summary>
+        /// ボールに力を加える
+        /// </summary>
+        public void AddForce(Vector3 direction, float power, bool isOverrideVelocity = false)
+        {
+            if (isOverrideVelocity)
+            {
+                ballRigidbody.velocity = Vector3.zero;
+            }
+
+            var force = direction.normalized * power;
+            ballRigidbody.AddForce(force, ForceMode.Impulse);
+        }
+
+        /// <summary>
         /// 倍率のパネルに衝突したときに呼ばれる
         /// </summary>
         private void OnTriggerEnterPanel(GameObject panelObject)
         {
             var panel = panelObject.GetComponent<Panel>();
-            ballManager.SetBall(panel.BallGeneratePoint, panel.Multiply - 1);
+            for (var i = 0; i < panel.Multiply - 1; i++)
+            {
+                ballManager.SetBall(panel.BallGeneratePoint);
+            }
         }
 
         /// <summary>
@@ -114,8 +137,18 @@ namespace InGame.Ball
         private void OnCollisionEnterJackPot()
         {
             gameManager.AddScore(5);
-            gameManager.AddJackPotPoint();
+            gameManager.AddJackPotPoint(3);
             ballManager.EnqueueBall(this);
+        }
+
+        /// <summary>
+        /// バンパーに衝突したときに呼ばれる
+        /// </summary>
+        private void OnCollisionEnterBumper(Vector3 bumperPosition)
+        {
+            var direction = ballRigidbody.position - bumperPosition;
+            var power = Random.Range(15f, 30f);
+            AddForce(direction, power, true);
         }
     }
 }

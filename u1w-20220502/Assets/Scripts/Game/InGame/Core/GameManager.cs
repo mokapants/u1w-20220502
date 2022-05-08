@@ -18,7 +18,7 @@ namespace InGame.Core
         private ReactiveProperty<int> scoreProperty;
         private ReactiveProperty<int> jackPotProperty;
         private Subject<int> onJackPotSubject;
-        private static readonly int MaxScore = 100;
+        private static readonly int MaxScore = 1000;
 
         // イベント
         public IReadOnlyReactiveProperty<float> ElapsedTimeProperty => elapsedTimeProperty;
@@ -128,7 +128,7 @@ namespace InGame.Core
             
             PlayLoadAnySceneAnimation();
             
-            await UniTask.Delay(TimeSpan.FromSeconds(1f));
+            await UniTask.Delay(TimeSpan.FromSeconds(2f));
 
             SceneManager.LoadScene("Result");
         }

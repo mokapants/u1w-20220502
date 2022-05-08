@@ -1,7 +1,7 @@
 {
   "fieldSize": 21,
-  "startPointX": 10,
-  "startPointZ": 10,
+  "startPointX": 14,
+  "startPointZ": 19,
   "fieldTileDataArray": [
     {
       "tiles": [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
