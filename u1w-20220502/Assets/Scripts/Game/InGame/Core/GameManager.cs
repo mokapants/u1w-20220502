@@ -18,7 +18,12 @@ namespace InGame.Core
         private ReactiveProperty<int> scoreProperty;
         private ReactiveProperty<int> jackPotProperty;
         private Subject<int> onJackPotSubject;
+
         private static readonly int MaxScore = 1000;
+
+        // SE
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip jackPotClip;
 
         // イベント
         public IReadOnlyReactiveProperty<float> ElapsedTimeProperty => elapsedTimeProperty;
@@ -112,6 +117,11 @@ namespace InGame.Core
         /// </summary>
         private void DoJackPot()
         {
+            if (jackPotClip != null)
+            {
+                audioSource.PlayOneShot(jackPotClip, 0.7f);
+            }
+
             onJackPotSubject.OnNext(JackPotScore);
             ResetJackPotPoint();
         }
@@ -125,9 +135,9 @@ namespace InGame.Core
             gameRepository.SaveScore(ElapsedTime);
 
             await UniTask.Delay(TimeSpan.FromSeconds(2f));
-            
+
             PlayLoadAnySceneAnimation();
-            
+
             await UniTask.Delay(TimeSpan.FromSeconds(2f));
 
             SceneManager.LoadScene("Result");

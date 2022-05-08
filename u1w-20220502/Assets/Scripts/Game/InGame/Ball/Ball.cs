@@ -16,7 +16,15 @@ namespace InGame.Ball
         [SerializeField] private Rigidbody ballRigidbody;
         [SerializeField] private float panelCoolTime;
         private bool canHitPanel;
+
         private CancellationTokenSource canHitPanelCooldownCTS;
+
+        // SE
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip hitWallClip;
+        [SerializeField] private AudioClip hit1ptClip;
+        [SerializeField] private AudioClip hitU1WClip;
+        [SerializeField] private AudioClip hitBumperClip;
 
         [Inject]
         public void Constructor(
@@ -35,6 +43,11 @@ namespace InGame.Ball
 
         private void OnCollisionEnter(Collision collision)
         {
+            if (collision.gameObject.CompareTag("Untagged"))
+            {
+                OnCollisionEnterWall();
+            }
+
             if (collision.gameObject.CompareTag("Goal"))
             {
                 OnCollisionEnterGoal();
@@ -123,10 +136,26 @@ namespace InGame.Ball
         }
 
         /// <summary>
+        /// 壁と衝突したときに呼ばれる
+        /// </summary>
+        private void OnCollisionEnterWall()
+        {
+            if (hitWallClip != null)
+            {
+                audioSource.PlayOneShot(hitWallClip);
+            }
+        }
+
+        /// <summary>
         /// ゴールと衝突したときに呼ばれる
         /// </summary>
         private void OnCollisionEnterGoal()
         {
+            if (hit1ptClip != null)
+            {
+                audioSource.PlayOneShot(hit1ptClip);
+            }
+
             gameManager.AddScore();
             ballManager.EnqueueBall(this);
         }
@@ -136,6 +165,11 @@ namespace InGame.Ball
         /// </summary>
         private void OnCollisionEnterJackPot()
         {
+            if (hitU1WClip != null)
+            {
+                audioSource.PlayOneShot(hitU1WClip);
+            }
+
             gameManager.AddScore(5);
             gameManager.AddJackPotPoint(3);
             ballManager.EnqueueBall(this);
@@ -146,6 +180,11 @@ namespace InGame.Ball
         /// </summary>
         private void OnCollisionEnterBumper(Vector3 bumperPosition)
         {
+            if (hitBumperClip != null)
+            {
+                audioSource.PlayOneShot(hitBumperClip, 0.7f);
+            }
+
             var direction = ballRigidbody.position - bumperPosition;
             var power = Random.Range(15f, 30f);
             AddForce(direction, power, true);

@@ -17,7 +17,13 @@ namespace InGame.Ball
         [SerializeField] private Transform jackPotDropPoint;
         [SerializeField] private Transform jackPotDropDirection;
         [SerializeField] private float ballDropInterval;
+
         [SerializeField] private float jackPotDropInterval;
+
+        // SE
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip ballDropClip;
+        [SerializeField] private AudioClip jackPotDropClip;
 
         // プロパティ
         private Vector3 BallDropPoint => ballDropPoint.position;
@@ -50,6 +56,11 @@ namespace InGame.Ball
 
             while (gameManager.IsPlaying)
             {
+                if (ballDropClip != null)
+                {
+                    audioSource.PlayOneShot(ballDropClip, 2);
+                }
+
                 var ball = ballManager.SetBall(BallDropPoint);
                 ball.AddForce(BallDropDirection, Random.Range(14f, 28f));
                 await UniTask.Delay(TimeSpan.FromSeconds(ballDropInterval));
@@ -64,6 +75,11 @@ namespace InGame.Ball
             var droppedBall = 0;
             while (gameManager.IsPlaying && droppedBall < jackPotScore)
             {
+                if (jackPotDropClip != null)
+                {
+                    audioSource.PlayOneShot(jackPotDropClip, 2);
+                }
+
                 var ball = ballManager.SetBall(JackPotDropPoint);
                 ball.AddForce(JackPotDropDirection, Random.Range(16f, 26f));
                 droppedBall++;

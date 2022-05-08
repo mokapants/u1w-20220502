@@ -12,7 +12,12 @@ namespace Game.Result.Core
     public class ResultManager : CoreManager
     {
         private ResultRepository resultRepository;
+
         [SerializeField] private RetryView retryView;
+
+        // SE
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip retryClip;
 
         [Inject]
         public void Constructor(
@@ -32,10 +37,15 @@ namespace Game.Result.Core
 
         private async UniTask OnClickRetryButton()
         {
+            if (retryClip != null)
+            {
+                audioSource.PlayOneShot(retryClip);
+            }
+
             PlayLoadAnySceneAnimation();
 
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
-            
+
             SceneManager.LoadScene("InGame");
         }
     }
