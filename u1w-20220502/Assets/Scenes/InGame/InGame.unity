@@ -836,6 +836,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1456810393}
     m_Modifications:
+    - target: {fileID: 6762145650402712534, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e69c6b4dd87882b42821b143362c32b4, type: 2}
     - target: {fileID: 7759404906875421263, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
       propertyPath: m_Name
       value: Object-Triangle Variant (1)
@@ -1864,6 +1868,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1456810393}
     m_Modifications:
+    - target: {fileID: 6762145650402712534, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 57c49d5c1904dc74a9806378b8689f38, type: 2}
     - target: {fileID: 7759404906875421263, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
       propertyPath: m_Name
       value: Object-Triangle Variant (10)
@@ -2188,6 +2196,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1456810393}
     m_Modifications:
+    - target: {fileID: 6762145650402712534, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 57c49d5c1904dc74a9806378b8689f38, type: 2}
     - target: {fileID: 7759404906875421263, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
       propertyPath: m_Name
       value: Object-Triangle Variant (3)
@@ -3419,6 +3431,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1456810393}
     m_Modifications:
+    - target: {fileID: 6762145650402712534, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 57c49d5c1904dc74a9806378b8689f38, type: 2}
     - target: {fileID: 7759404906875421263, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
       propertyPath: m_Name
       value: Object-Triangle Variant
@@ -3656,6 +3672,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1456810393}
     m_Modifications:
+    - target: {fileID: 6762145650402712534, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e69c6b4dd87882b42821b143362c32b4, type: 2}
     - target: {fileID: 7759404906875421263, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
       propertyPath: m_Name
       value: Object-Triangle Variant (5)
@@ -3974,6 +3994,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1456810393}
     m_Modifications:
+    - target: {fileID: 6762145650402712534, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a6c10ef1315f7614ba93e6e26138e7a9, type: 2}
     - target: {fileID: 7759404906875421263, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
       propertyPath: m_Name
       value: Object-Triangle Variant (8)
@@ -4064,7 +4088,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -30, y: -30}
+  m_SizeDelta: {x: -20, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1082512809
 MonoBehaviour:
@@ -4095,7 +4119,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 3
 --- !u!222 &1082512810
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5231,6 +5255,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1456810393}
     m_Modifications:
+    - target: {fileID: 6762145650402712534, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e69c6b4dd87882b42821b143362c32b4, type: 2}
     - target: {fileID: 7759404906875421263, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
       propertyPath: m_Name
       value: Object-Triangle Variant (6)
@@ -5828,6 +5856,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1456810393}
     m_Modifications:
+    - target: {fileID: 6762145650402712534, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a6c10ef1315f7614ba93e6e26138e7a9, type: 2}
     - target: {fileID: 7759404906875421263, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
       propertyPath: m_Name
       value: Object-Triangle Variant (7)
@@ -6696,6 +6728,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1456810393}
     m_Modifications:
+    - target: {fileID: 6762145650402712534, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 57c49d5c1904dc74a9806378b8689f38, type: 2}
     - target: {fileID: 7759404906875421263, guid: 334a70b23c88c834f8b51a8a3bd21e05, type: 3}
       propertyPath: m_Name
       value: Object-Triangle Variant (9)
